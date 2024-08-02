@@ -13,7 +13,7 @@
     "minimist": ">=1.2.2",
     "typedoc": "^0.16.11"
   },
-  "name": "@jingze/proxy-wasm-assemblyscript-sdk",
+  "name": "proxy-wasm-assemblyscript-sdk-test",
   "description": "Use this SDK to write extensions for the proxy WASM ABI",
   "version": "0.0.1",
   "main": "assembly/index.ts",
