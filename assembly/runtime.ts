@@ -21,7 +21,7 @@ import { free } from "./malloc";
 function CHECK_RESULT(c: imports.WasmResult): void {
   if (c != WasmResultValues.Ok) {
     log(LogLevelValues.critical, c.toString());
-    throw new Error(":(");
+    // throw new Error(":(");
   }
 }
 
@@ -245,10 +245,23 @@ export function get_current_time_nanoseconds(): u64 {
   return nanos.data;
 }
 
-export function get_property(path: string): ArrayBuffer {
+class GetPropertyResult {
+  returnValue: ArrayBuffer
+  status: WasmResultValues
+  constructor(returnValue: ArrayBuffer, status: WasmResultValues) {
+    this.returnValue = returnValue;
+    this.status = status;
+  }
+}
+
+export function get_property(path: string): GetPropertyResult {
   let buffer = String.UTF8.encode(path);
-  CHECK_RESULT(imports.proxy_get_property(changetype<usize>(buffer), buffer.byteLength, globalArrayBufferReference.bufferPtr(), globalArrayBufferReference.sizePtr()));
-  return globalArrayBufferReference.toArrayBuffer();
+  let result = imports.proxy_get_property(changetype<usize>(buffer), buffer.byteLength, globalArrayBufferReference.bufferPtr(), globalArrayBufferReference.sizePtr());
+  CHECK_RESULT(result);
+  if (result != WasmResultValues.Ok){
+    return new GetPropertyResult(new ArrayBuffer(0), result);
+  }
+  return new GetPropertyResult(globalArrayBufferReference.toArrayBuffer(), result);
 }
 
 export function set_property(path: string, data: ArrayBuffer): WasmResultValues {
@@ -1042,7 +1055,7 @@ export class Context extends BaseContext {
 }
 
 function get_plugin_root_id(): string {
-  let root_id = get_property("plugin_root_id");
+  let root_id = get_property("plugin_root_id").returnValue;
   if (root_id.byteLength == 0) {
     return "";
   }

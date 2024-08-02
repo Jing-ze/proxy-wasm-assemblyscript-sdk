@@ -15,21 +15,21 @@
   },
   "name": "@jingze/proxy-wasm-assemblyscript-sdk",
   "description": "Use this SDK to write extensions for the proxy WASM ABI",
-  "version": "0.0.6",
+  "version": "0.0.1",
   "main": "assembly/index.ts",
   "directories": {
     "doc": "docs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jing-ze/proxy-wasm-assemblyscript-sdk"
+    "url": "git+https://github.com/Jing-ze/proxy-wasm-assemblyscript-sdk.git"
   },
   "keywords": [
     "wasm",
     "proxy"
   ],
-  "author": "Yuval Kohavi",
-  "license": " Apache-2.0",
+  "author": "jingze.dai",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Jing-ze/proxy-wasm-assemblyscript-sdk/issues"
   },
