@@ -19,7 +19,7 @@ import { free } from "./malloc";
 }
 
 function CHECK_RESULT(c: imports.WasmResult): void {
-  if (c != WasmResultValues.Ok) {
+  if (c != WasmResultValues.Ok && c != WasmResultValues.NotFound) {
     log(LogLevelValues.critical, c.toString());
     // throw new Error(":(");
   }
