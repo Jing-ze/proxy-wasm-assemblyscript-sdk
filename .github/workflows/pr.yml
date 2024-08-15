@@ -17,6 +17,6 @@ jobs:
         node-version: 16.17.0
     - run: npm install
     - run: npm run asbuild
-    # make sure example filter builds:
-    # - run: cd examples/auth && npm install && npm run asbuild
-    # - run: cd examples/addheader && npm install && npm run asbuild
+    make sure example filter builds:
+    - run: cd examples/remove-headers && npm install && npm run asbuild
+    - run: cd examples/addheader && npm install && npm run asbuild
